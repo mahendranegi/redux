@@ -12,9 +12,9 @@ const handleMinusToCart = () => {
     dispatch(DecrementItems());
   };
 
-  return (
-    <div className="container">
-      <div className="products">
+  //Load data when the app starts
+
+  return (    
         <div className="product-card">
 
           <img src={image} alt={title} />
@@ -27,17 +27,23 @@ const handleMinusToCart = () => {
             ₹ {price}
           </p>
 
+            <div style={{display:'flex',gap: '12px'}}>
           <button
             className="add-btn"
-            onClick={handleAddToCart}
+            onClick={()=>handleAddToCart()}
           >
             Add to Cart
           </button>
-          <span onClick={handleMinusToCart}>Click</span>
+          <button
+            className="add-btn"
+            style={{background:'#ef6c82',border: '1px solid #ef6c82'}}
+            onClick={handleMinusToCart}
+          >
+            Remove
+          </button>
+          </div>
 
         </div>
-      </div>
-    </div>
   );
 }
 

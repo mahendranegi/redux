@@ -17,11 +17,16 @@ export const AddToCart = createSlice({
       state.value += 1;
     },
     DecrementItems: (state) => {
-      state.value -= 1;
+        if (state.value > 0) {
+    state.value -= 1;
+  }
+    },
+     ClearAllItems: (state) => {
+        state.value = 0;
     },
   },
 });
 
-export const { IncrementItems,DecrementItems } = AddToCart.actions;
+export const { IncrementItems,DecrementItems,ClearAllItems } = AddToCart.actions;
 
 export default AddToCart.reducer;

@@ -1,10 +1,16 @@
 // import logo from './logo.svg';
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
-import ProductCart from './components/ProductCart';
+import Button from '@mui/material/Button';
+import { useDispatch } from 'react-redux';
+import { ClearAllItems } from './redux/slice';
+// import ProductCart from './components/ProductCart';
+const ProductCart = lazy(()=> import("./components/ProductCart"))
+
 
 function App() {
+   const dispatch = useDispatch();
   const [val, setVal] = useState([]);
   console.log(val,'Hello val')
   useEffect(() => {
@@ -20,20 +26,38 @@ function App() {
   
   }, [])
   
+  const handleClearAll = () =>{
+    dispatch(ClearAllItems())
+  }
   return (
     <div className="App">
       <Header />
-  
+  <button onClick={handleClearAll} style={{width:'fit-content',margin:' 24px 0 0 24px'}} className='add-btn'>Clear All</button>
          {/* <ProductCart price='23' title="hello" /> */}
-     
-     {val?.map((item)=>{
+         <Suspense fallback={ <Button
+         
+          loading
+          loadingPosition="start"
+          variant="outlined"
+        >
+          Save
+        </Button>}>
+     <div className="container"> 
+       <div className="products">
+{val?.map((item)=>{
       return  <ProductCart
             key={item.id}
             price={item.price}
             title={item.title}
             image={item?.thumbnail}
+
           />
      })}
+
+       </div>
+     </div>
+     </Suspense>
+     
     </div>
   );
 }

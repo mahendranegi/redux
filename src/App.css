@@ -69,6 +69,7 @@ header {
   border: none;
   border-radius: 7px;
   background: #2563eb;
+  font-weight: bold;
   color: white;
   font-size: 15px;
   cursor: pointer;
